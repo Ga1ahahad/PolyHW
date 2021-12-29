@@ -1,5 +1,4 @@
 #include <iostream>
-#include "functions.cpp"
 #include <fstream>
 
 using namespace std;
