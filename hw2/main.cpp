@@ -17,7 +17,8 @@ int main(){
         walls[i].x = data[3+2*i];
         walls[i].h = data[4+2*i];
     };
-    int id{};
+    // walls = arrangeByX(walls, (len-3)/2);
+    int id{}, last_id{};
     while (true){
         int* wallIds{getWalls(bullet, walls, (len-3)/2)};
         if (wallIds[0]==0){
@@ -32,11 +33,10 @@ int main(){
         }
         id = getClosestWallId(bullet, walls, wallIds);
         bullet.moveTo(walls[id]);
+        last_id = id;
         if (bullet.h<=0){
             if (bullet.vx>0){
                 cout << id << endl;
-                cout << bullet << endl;
-                cout << walls[id];
                 break;
             };
             if (bullet.vx<0){
@@ -46,10 +46,9 @@ int main(){
         };
         if (walls[id].h>=bullet.h){
             bullet.rebound();
-            cout << " at " << walls[id] << endl;
-            cout << bullet << endl;
         };
         delete[] wallIds;
     };
+    cout << "bullet coord: " << bullet << endl;
     return 0;
 }

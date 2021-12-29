@@ -29,7 +29,6 @@ struct Bullet{
     };
     void rebound(){
         vx = -vx;
-        cout << "rebound";
     };
     void moveTo(Wall targetWall){
         double t{abs((targetWall.x-x)/vx)};
@@ -88,7 +87,22 @@ int getClosestWallId(Bullet b, Wall* walls, int* wallIds){
     for (int i=1; i<wallIds[0]; i++){
         if (abs(walls[closestWallId].x-b.x)>abs(walls[wallIds[i]].x-b.x)){ closestWallId = wallIds[i]; }
     };
+    // cout << "closest wall id: " << closestWallId << endl;
     return closestWallId;
+}
+
+Wall* arrangeByX(Wall* walls, int size){
+    Wall temp(0,0);
+    for (int i=0; i<(size-1); i++){
+        for (int j=i; j<size; j++){
+            if (walls[j].x < walls[i].x){
+                temp = walls[j];
+                walls[j] = walls[i];
+                walls [i] = temp;
+            };
+        };
+    };
+    return walls;
 }
 
 /*
